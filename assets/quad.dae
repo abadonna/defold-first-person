@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2012-10-10T12:34:45Z</created><keywords></keywords><modified>2012-10-10T12:34:45Z</modified><revision></revision><subject></subject><title></title><unit meter="1.000000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_geometries>
+    <geometry id="pPlane1-lib" name="pPlane1Mesh">
+      <mesh>
+        <source id="pPlane1-POSITION">
+          <float_array id="pPlane1-POSITION-array" count="12">
+            -1. -1. 0 1. -1. 0 -1. 1. 0 1. 1. 0
+          </float_array>
+          <technique_common>
+            <accessor source="#pPlane1-POSITION-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pPlane1-Normal0">
+          <float_array id="pPlane1-Normal0-array" count="12">
+            0.5 0.5 0.0 0.5 0.5 0.0 0.5 0.5 0.0 0.5 0.5 0.0
+          </float_array>
+          <technique_common>
+            <accessor source="#pPlane1-Normal0-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pPlane1-UV0">
+          <float_array id="pPlane1-UV0-array" count="8">
+            0.0 0.0 1.0 0.0 0.0 1.0 1.0 1.0
+          </float_array>
+          <technique_common>
+            <accessor source="#pPlane1-UV0-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pPlane1-VERTEX">
+          <input semantic="POSITION" source="#pPlane1-POSITION"/>
+          <input semantic="NORMAL" source="#pPlane1-Normal0"/>
+        </vertices>
+        <triangles count="2" material="lambert1">
+          <input semantic="VERTEX" offset="0" source="#pPlane1-VERTEX"/>
+          <input semantic="TEXCOORD" offset="1" set="0" source="#pPlane1-UV0"/>
+          <p> 3 3 2 2 0 0 3 3 0 0 1 1</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <scene>
+    <instance_visual_scene url="#"></instance_visual_scene>
+  </scene>
+</COLLADA>

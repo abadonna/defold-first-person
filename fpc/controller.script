@@ -1,0 +1,76 @@
+go.property("free", true)
+
+function init(self)
+	if self.free then
+		msg.post("#collisionobject", "disable")
+	end
+	msg.post(".", "acquire_input_focus")
+	msg.post("@render:", "use_camera_projection")
+	msg.post(".", "acquire_camera_focus")
+	
+	self.ay = math.rad(go.get(".", "euler.y"))
+	self.ax = math.rad(go.get(".", "euler.x"))
+	--local q = vmath.quat_rotation_y(self.ay) * vmath.quat_rotation_x(self.ax) 
+
+	if html5 then
+		pointer_lock_ext.html5_pointer_locked()
+	else
+		pointer_lock_ext.glfw_mouse_lock()
+	end
+	
+end
+
+function on_input(self, action_id, action)
+	
+	if action_id == nil and math.abs(action.dx) < 100  and math.abs(action.dy) < 100 then
+		self.ax = self.ax + action.dy * 0.01
+		self.ay = self.ay - action.dx * 0.01
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		go.set_rotation(q, ".")
+	end
+	
+	if action_id == hash("forward") then
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		local pos = vmath.rotate(q, vmath.vector3(0, 0, -1)) * 0.1;
+		go.set_position(go.get_position() + pos)
+	elseif action_id == hash("back") then
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		local pos = vmath.rotate(q, vmath.vector3(0, 0, 1)) * 0.1;
+		go.set_position(go.get_position() + pos)
+	end
+
+	if action_id == hash("forward") then
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		local pos = vmath.rotate(q, vmath.vector3(0, 0, -1)) * 0.1;
+		if not self.free then
+			pos.y = 0;
+		end
+		go.set_position(go.get_position() + pos)
+	elseif action_id == hash("back") then
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		local pos = vmath.rotate(q, vmath.vector3(0, 0, 1)) * 0.1;
+		if not self.free then
+			pos.y = 0;
+		end
+		go.set_position(go.get_position() + pos)
+	end
+	
+	if action_id == hash("left") then
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		local pos = vmath.rotate(q, vmath.vector3(-1, 0, 0)) * 0.1;
+		go.set_position(go.get_position() + pos)
+	elseif action_id == hash("right") then
+		local q = vmath.quat_rotation_y(self.ay) *  vmath.quat_rotation_x(self.ax)
+		local pos = vmath.rotate(q, vmath.vector3(1, 0, 0)) * 0.1;
+		go.set_position(go.get_position() + pos)
+	end
+	
+end
+
+function final(self)
+	pointer_lock_ext.glfw_mouse_unlock()
+
+	if html5 then
+		pointer_lock_ext.html5_on_click(nil)
+	end
+end
